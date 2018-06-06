@@ -1,1 +1,1 @@
-### scripts for checkio web
+### scripts for [checkio](https://py.checkio.org)
