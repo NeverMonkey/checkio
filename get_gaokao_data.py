@@ -45,7 +45,7 @@ def get_score(url):
     tables = soup.select('h3 ~ table')
     for index, table in enumerate(tables):
         tr = table.find_all(
-            'tr', attrs={'class': re.compile('^c_\S*')})  # 使用正则匹配
+            'tr', attrs={'class': re.compile(r'^c_\S*')})  # 使用正则匹配
         for j in tr:
             td = j.select('td')
             score_list = []
