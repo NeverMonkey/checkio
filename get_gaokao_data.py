@@ -3,7 +3,7 @@
 # __Author__=neonie
 
 import re
-from multiprocessing import Pool, Process
+from multiprocessing import Pool
 
 import pymongo
 import requests
@@ -14,6 +14,14 @@ from bs4 import BeautifulSoup
 pro_link = []
 client = pymongo.MongoClient("172.16.150.101", 27017)
 mydb = client.gaokao
+
+header = {
+    'User-Agent':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
+    'Connection':
+    'keep - alive'
+}
+url = 'http://www.gaokao.com/guangdong/fsx/'
 
 
 def get_provice(url):
@@ -69,14 +77,7 @@ def get_score(url):
 
 
 if __name__ == '__main__':
-    header = {
-        'User-Agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0',
-        'Connection':
-        'keep - alive'
-    }
-    url = 'http://www.gaokao.com/guangdong/fsx/'
-
     get_provice(url)
     pool = Pool()
+    print(pro_link)
     pool.map(get_score, [i for i in pro_link])  # 使用多线程
